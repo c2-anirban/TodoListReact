@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DateTimePicker from "react-datetime-picker";
+// import DateTimePicker from "react-datetime-picker";
 
 export const AddTodo = ({ addTodo }) => {
   const [title, setTitle] = useState("");
@@ -15,6 +15,8 @@ export const AddTodo = ({ addTodo }) => {
       setTitle("");
       setDesc("");
       setdateTime("");
+
+      
     }
   };
   return (
@@ -47,12 +49,12 @@ export const AddTodo = ({ addTodo }) => {
           />
         </div>
         <div className="mb-3 react-datetime-picker">
-        <input
+          <input
             type="datetime-local"
-          value={dateTime}
-          onChange={(e) => setdateTime(e.target.value)}
-        />
-        </div >
+            value={dateTime}
+            onChange={(e) => setdateTime(e.target.value)}
+          />
+        </div>
         <br />
         <button type="submit" className="mt-3 btn btn-sm btn-success">
           Add Todo

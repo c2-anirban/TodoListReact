@@ -10,18 +10,37 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   let initTodo;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setsearchResults] = useState([]);
   if (localStorage.getItem("todos") === null) {
     initTodo = [];
   } else {
     initTodo = JSON.parse(localStorage.getItem("todos"));
   }
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm !== "") {
+      const newTodosList = todos.filter((todos) => {
+        return Object.values(todos)
+          .join("")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setsearchResults(newTodosList);
+    } else {
+      setsearchResults(todos);
+    }
+  };
+
+  const onUpdate  = (todo) => {
+    
+    const filteredTodo = todos.filter((e) =>{ return e!== todo});
+    console.log(filteredTodo);
+    const selectedTodo = todos.find((e)=>{ return e !== todo});
+    console.log(selectedTodo);
+  }
 
   const onDelete = (todo) => {
-    console.log("I am ondelete of todo", todo);
-    // Deleting this way in react does not work
-    // let index = todos.indexOf(todo);
-    // todos.splice(index, 1);
-
     setTodos(
       todos.filter((e) => {
         return e !== todo;
@@ -32,7 +51,7 @@ function App() {
   };
 
   const addTodo = (title, desc, dateTime) => {
-    console.log("Adding this todo"," ", title, desc, dateTime);
+    console.log("Adding this todo", " ", title, desc, dateTime);
     let sno;
     if (todos.length === 0) {
       sno = 0;
@@ -46,7 +65,7 @@ function App() {
       dateTime: dateTime,
     };
     setTodos([...todos, myTodo]);
-    console.log(myTodo);
+  
   };
 
   const [todos, setTodos] = useState(initTodo);
@@ -57,7 +76,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header title="My Todos List" searchBar={false} />
+        <Header />
         <Switch>
           <Route
             exact
@@ -67,7 +86,13 @@ function App() {
                 <>
                   <AddTodo addTodo={addTodo} />
 
-                  <Todos todos={todos} onDelete={onDelete} />
+                  <Todos
+                    todos={searchTerm.length < 1 ? todos : searchResults}
+                    onUpdate={onUpdate}
+                    onDelete={onDelete}
+                    term={searchTerm}
+                    searchKeyword={searchHandler}
+                  />
                 </>
               );
             }}
