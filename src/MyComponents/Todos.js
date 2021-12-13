@@ -27,7 +27,7 @@ export const Todos = (props) => {
         <button className="btn btn-outline-success" type="submit">
           Search
         </button>
-      </form>
+      </form><br/>
       {props.todos.length === 0
         ? "No Todos to display"
         : props.todos.map((todo) => {
