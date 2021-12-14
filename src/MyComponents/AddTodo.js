@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 // import DateTimePicker from "react-datetime-picker";
 
+
+
+
 export const AddTodo = ({ addTodo }) => {
+  
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [dateTime, setdateTime] = useState(new Date());
+
+
+  
 
   const submit = (e) => {
     e.preventDefault();
@@ -56,7 +63,7 @@ export const AddTodo = ({ addTodo }) => {
           />
         </div>
         <br />
-        <button type="submit" className="mt-3 btn btn-sm btn-success">
+        <button type="submit" className=" btn btn-sm btn-success">
           Add Todo
         </button>
       </form>

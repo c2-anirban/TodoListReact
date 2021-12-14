@@ -12,6 +12,7 @@ export const Todos = (props) => {
     props.searchKeyword(inputEl.current.value);
   };
   return (
+    
     <div className="container" style={myStyle}>
       <h3 className="my-3">Todos List</h3>
       <form className="d-flex">
@@ -32,7 +33,7 @@ export const Todos = (props) => {
         ? "No Todos to display"
         : props.todos.map((todo) => {
             return (
-              <TodoItem todo={todo} key={todo.sno} onDelete={props.onDelete} onUpdate={props.onUpdate}/>
+              <TodoItem todo={todo} key={todo.sno} expired={props.expired} onDelete={props.onDelete} onUpdate={props.onUpdate}/>
             );
           })}
     </div>
